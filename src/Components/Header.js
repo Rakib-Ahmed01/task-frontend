@@ -1,9 +1,15 @@
-import { useState } from 'react';
-import { FiMenu, FiX } from 'react-icons/fi';
+import { Tooltip } from '@mantine/core';
+import { useContext, useState } from 'react';
+import { FiLogIn, FiLogOut, FiMenu, FiX } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../contexts/UserContext';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { user, logout } = useContext(AuthContext);
+
+  console.log(user);
 
   return (
     <header className="bg-black text-gray-200 top-0 z-50">
@@ -20,6 +26,26 @@ export default function Header() {
             <Link to="/add-task">Add Task</Link>
             <Link to="/my-tasks">My Tasks</Link>
             <Link to="/completed-tasks">Completed Tasks</Link>
+            {!user ? (
+              <>
+                <Link
+                  className="my-2 font-medium text-base text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:ml-3 md:my-0"
+                  to="/login"
+                >
+                  <Tooltip label="Login" position="bottom">
+                    <button>
+                      <FiLogIn title="login" className="mt-[7px]" />
+                    </button>
+                  </Tooltip>
+                </Link>
+              </>
+            ) : (
+              <Tooltip label="Logout">
+                <button>
+                  <FiLogOut onClick={logout} position="bottom" />
+                </button>
+              </Tooltip>
+            )}
           </ul>
           <div className="block md:hidden">
             {!isOpen ? (
