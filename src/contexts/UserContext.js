@@ -69,8 +69,6 @@ export default function UserContext({ children }) {
       });
   };
 
-  console.log(user);
-
   const value = {
     user,
     setUser,

@@ -9,8 +9,6 @@ export default function Header() {
 
   const { user, logout } = useContext(AuthContext);
 
-  console.log(user);
-
   return (
     <header className="bg-black text-gray-200 top-0 z-50">
       <nav className=" transition-all duration-500">

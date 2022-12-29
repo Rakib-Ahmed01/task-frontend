@@ -1,10 +1,12 @@
 import { MantineProvider } from '@mantine/core';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Toaster } from 'react-hot-toast';
 import App from './App';
 import UserContext from './contexts/UserContext';
 import './index.css';
+
+export const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,8 +19,9 @@ root.render(
       withNormalizeCSS
     >
       <UserContext>
-        <Toaster />
-        <App />
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
       </UserContext>
     </MantineProvider>
   </React.StrictMode>
